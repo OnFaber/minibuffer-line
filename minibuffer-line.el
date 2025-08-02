@@ -36,6 +36,15 @@
   "Use the idle minibuffer window to display status information."
   :group 'mode-line)
 
+(defcustom minibuffer-line-group-left nil
+  "Modules to place on the left in Minibar.")
+
+(defcustom minibuffer-line-group-mid nil
+  "Modules to place in the middle in Minibar.")
+
+(defcustom minibuffer-line-group-right nil
+  "Modules to place on the right in Minibar.")
+
 (defcustom minibuffer-line-format
   '("" (:eval system-name) " | " (:eval (format-time-string "%F %R")))
   "Specification of the contents of the minibuffer-line.
@@ -65,8 +74,7 @@ Uses the same format as `mode-line-format'."
     (setq minibuffer-line--timer nil))
   (when minibuffer-line-mode
     (setq minibuffer-line--timer
-          (run-with-timer t minibuffer-line-refresh-interval
-                          #'minibuffer-line--update))
+          (run-with-timer t #'minibuffer-line--update))
     (minibuffer-line--update)))
 
 (defun minibuffer-line--update ()
